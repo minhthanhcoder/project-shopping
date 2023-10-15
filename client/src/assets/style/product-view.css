@@ -8,6 +8,9 @@
     display: flex;
     justify-content: center;
 }
+.product-view_title {
+    margin-top: 101px;
+}
 
 .product-img {
     max-height: 600px;

@@ -1,13 +1,29 @@
 import React from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import "../../../assets/style/login-auth.css"
-import {signInWithPopup} from "firebase/auth"
-import {auth, provider} from "../../../firebase/firebase.config"
+import { signInWithPopup} from "firebase/auth"
+import {auth, faceProvider, provider} from "../../../firebase/firebase.config"
 
 const Login = () => {
 const navigate = useNavigate()
-  const handleLoginByFacebook = () => {
-
+  const handleLoginByFacebook = async  () =>{
+     signInWithPopup(auth,faceProvider)
+    .then((response)=> {
+      console.log("123",response);
+    
+      // const userLogin = {
+      //   email: response.user.email,
+      //   userName: response.user.displayName,
+      //   userId: response.user.uid,
+      //   image: response.user.photoURL,
+      // }
+      // localStorage.setItem("isLogin", JSON.stringify(userLogin))
+      // navigate("/")
+    })
+    .catch((err)=> {
+      console.log(err);
+      
+    })
   }
 
   const handleLoginByGoogle = ()=> {
