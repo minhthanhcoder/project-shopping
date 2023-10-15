@@ -2,12 +2,10 @@ import React, {useState} from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import "../../assets/style/header.css"
 import "../../assets/style/modal.css"
-import Modal from '../../pages/users/carts/Modal'
 
 const Header:React.FC<{}> = () => {
   const data = localStorage.getItem("isLogin")
   const isLogin = data?  JSON.parse(data) : null
-  console.log(isLogin);
   const navigate = useNavigate()
   const handleLogOut = () => {
    localStorage.removeItem("isLogin")
@@ -16,16 +14,13 @@ const Header:React.FC<{}> = () => {
    
   const [modal, setModal] = useState(false)
   
-  const handleOpenModal = ()=> {
-    setModal(true)
+  const handleToggleModal = ()=> {
+    setModal(!modal)
   }
 
-  const handleCloseModal = ()=> {
-    setModal(false)
-  }
   return (
     <>
-     <div className=' flex justify-between bg-white shadow h-14 text-center items-center fixed top-0 left-0 right-0 z-10'>
+     <header className=' flex justify-between bg-white shadow h-14 text-center items-center fixed top-0 left-0 right-0 z-10'>
      <Link to={"/"}>
      <div className='cursor-pointer'><img src="https://canifa.com/assets/images/logo.svg" alt="logo" /></div>
      </Link>
@@ -34,7 +29,7 @@ const Header:React.FC<{}> = () => {
         <span><i className="text-red-700 px-2 cursor-pointer fa-solid fa-magnifying-glass"></i></span>
       </div>
       <div className='flex justify-between items-center'>
-        <div onClick={()=>handleOpenModal()} className='relative'><i className="bg-transparent text-red-700 font-semibold cursor-pointer hover:opacity-50 py-2 px-4 border border-red-500 hover:border-transparent rounded fa-solid fa-cart-shopping mx-2 "></i>
+        <div onClick={()=>handleToggleModal()} className='relative'><i className="bg-transparent text-red-700 font-semibold cursor-pointer hover:opacity-50 py-2 px-4 border border-red-500 hover:border-transparent rounded fa-solid fa-cart-shopping mx-2 "></i>
         <div className='rounded-full bg-red-700 w-6 text-white absolute -top-2 -left-1'>1</div>
         </div>
         
@@ -65,8 +60,130 @@ const Header:React.FC<{}> = () => {
       </div>
       </>}
       </div>
-     </div>
-     <Modal visible = {modal}/>
+     {modal? <>
+      <div onClick={handleToggleModal} className='fixed top-0 right-0 left-0 bottom-0 bg-slate-500 backdrop-blur-sm bg-opacity-30 z-10 flex justify-end items-start '>
+        <div onClick={e => e.stopPropagation()} className='modal-container h-full 2xl:1/4 xl:w-1/3 md:w-1/2 sm:w-1/2 bg-white '>
+          <div className='relative flex justify-center items-center '>
+            {/* close btn */}
+          <div className='absolute top-1 left-0 cursor-pointer text-lg p-3  text-white rounded-full hover:opacity-60' onClick={handleToggleModal} >
+            <i className="fa-solid fa-arrow-right"></i>
+            </div>
+          {/* header */}
+          <div className='text-center font-black bg-slate-400 w-full text-2xl p-3'>Giỏ Hàng</div>
+          </div>
+          {/* content */}
+          <div className='overflow-y-auto h-3/4 p-3'>
+            {/* product item */}
+          <div className='product_item h-25 w-full border-b-2 flex justify-start text-center relative'>   
+            <img className='h-full w-auto' src="https://canifa.com/img/210/300/resize/1/t/1th22w002-cr125-1-thumb.webp" alt="" />
+            <p className='absolute -top-1 left-1 cursor-pointer p-1'>x</p>
+            <div className='m-3'>
+              <h2 className="product_name font-medium p-1">Áo sơ mi bé gái cotton dài tay họa tiết kẻ</h2>
+              <div className='flex justify-between m-2'>
+                <p>Màu: Đỏ</p>
+                <p>Size: 130</p>
+              </div>
+              <div className='flex justify-between items-center m-2'>
+                <p className="price font-medium">304.000 đ</p>
+               <div>
+                  <button className='w-8 border'>-</button>
+                  <input className='text-center w-8 border'  defaultValue={1} type="text" />
+                  <button className='w-8 border'>+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div className='product_item h-25 w-full  border-b-2 flex justify-start text-center relative'>   
+            <img className='h-full w-auto' src="https://canifa.com/img/210/300/resize/1/t/1th22w002-cr125-1-thumb.webp" alt="" />
+            <p className='absolute -top-1 left-1 cursor-pointer p-1'>x</p>
+            <div className='m-3'>
+              <h2 className="product_name font-medium p-1">Áo sơ mi bé gái cotton dài tay họa tiết kẻ</h2>
+              <div className='flex justify-between m-2'>
+                <p>Màu: Đỏ</p>
+                <p>Size: 130</p>
+              </div>
+              <div className='flex justify-between items-center m-2'>
+                <p className="price font-medium">304.000 đ</p>
+               <div>
+                  <button className='w-8 border'>-</button>
+                  <input className='text-center w-8 border'  defaultValue={1} type="text" />
+                  <button className='w-8 border'>+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div className='product_item h-25 w-full  border-b-2 flex justify-start text-center relative'>   
+            <img className='h-full w-auto' src="https://canifa.com/img/210/300/resize/1/t/1th22w002-cr125-1-thumb.webp" alt="" />
+            <p className='absolute -top-1 left-1 cursor-pointer p-1'>x</p>
+            <div className='m-3'>
+              <h2 className="product_name font-medium p-1">Áo sơ mi bé gái cotton dài tay họa tiết kẻ</h2>
+              <div className='flex justify-between m-2'>
+                <p>Màu: Đỏ</p>
+                <p>Size: 130</p>
+              </div>
+              <div className='flex justify-between items-center m-2'>
+                <p className="price font-medium">304.000 đ</p>
+               <div>
+                  <button className='w-8 border'>-</button>
+                  <input className='text-center w-8 border'  defaultValue={1} type="text" />
+                  <button className='w-8 border'>+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div className='product_item h-25 w-full  border-b-2 flex justify-start text-center relative'>   
+            <img className='h-full w-auto' src="https://canifa.com/img/210/300/resize/1/t/1th22w002-cr125-1-thumb.webp" alt="" />
+            <p className='absolute -top-1 left-1 cursor-pointer p-1'>x</p>
+            <div className='m-3'>
+              <h2 className="product_name font-medium p-1">Áo sơ mi bé gái cotton dài tay họa tiết kẻ</h2>
+              <div className='flex justify-between m-2'>
+                <p>Màu: Đỏ</p>
+                <p>Size: 130</p>
+              </div>
+              <div className='flex justify-between items-center m-2'>
+                <p className="price font-medium">304.000 đ</p>
+               <div>
+                  <button className='w-8 border'>-</button>
+                  <input className='text-center w-8 border'  defaultValue={1} type="text" />
+                  <button className='w-8 border'>+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div className='product_item h-25 w-full  border-b-2 flex justify-start text-center relative'>   
+            <img className='h-full w-auto' src="https://canifa.com/img/210/300/resize/1/t/1th22w002-cr125-1-thumb.webp" alt="" />
+            <p className='absolute -top-1 left-1 cursor-pointer p-1'>x</p>
+            <div className='m-3'>
+              <h2 className="product_name font-medium p-1">Áo sơ mi bé gái cotton dài tay họa tiết kẻ</h2>
+              <div className='flex justify-between m-2'>
+                <p>Màu: Đỏ</p>
+                <p>Size: 130</p>
+              </div>
+              <div className='flex justify-between items-center m-2'>
+                <p className="price font-medium">304.000 đ</p>
+               <div>
+                  <button className='w-8 border'>-</button>
+                  <input className='text-center w-8 border'  defaultValue={1} type="text" />
+                  <button className='w-8 border'>+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          {/* footer */}
+          <div className='fixed bottom-0 p-3 h-30 2xl:1/4 xl:w-1/3 md:w-1/2 sm:w-1/2 bg-slate-200 '>
+            <div className='flex justify-evenly text-slate-900 p-2 font-medium'><p>Tổng cộng :</p> <p>5.400.000 vnđ</p></div>
+            <div className='flex justify-evenly  text-3xl bg-red-600 font-extrabold text-white p-2 cursor-pointer hover:opacity-70 rounded-md'>Thanh Toán</div>
+            </div>
+        </div>
+      </div>
+      </> : null
+     }
+     </header>
     </>
   )
 }

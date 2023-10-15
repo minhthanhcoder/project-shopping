@@ -3,7 +3,7 @@ import React from 'react'
 const Footer:React.FC<{}> = () => {
   return (
     <>
-      <div className="footer flex justify-center bg-black">
+      <footer className="footer flex justify-center bg-black">
         
         <div className="footer-about m-5 text-white">
          <div className='bg-slate-500 rounded-lg m-3 p-3'>
@@ -28,7 +28,7 @@ Fax: +8424 - 6277.6419 <br />
 Email: hello@canifa.com</p>
          </div>
         </div>
-      </div>
+      </footer>
     </>
   )
 }
