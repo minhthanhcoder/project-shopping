@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import instance from '../../api/instans'
 import { getOneProducts } from '../../api/product.service'
 import { useDispatch } from "react-redux";
 import { productSlice } from '../../redux/reducers/product.slice';
 
 
+
 const ListProducts:React.FC<{}> = () => {
   const [listPro, setListPro]:any = useState([])
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   useEffect(()=>{
     instance.get("/api/v1/products")
@@ -20,9 +22,8 @@ const ListProducts:React.FC<{}> = () => {
   const handleFindOne = async (id:number) => {
     const product = await getOneProducts(id)
     console.log("vao dispatch");
-    
-    dispatch(productSlice.actions.getOnePro(product))
-    
+    await dispatch(productSlice.actions.getOnePro(product))
+    navigate("/product-view")
   }
   return (
     <>
@@ -36,7 +37,7 @@ const ListProducts:React.FC<{}> = () => {
       {/* <h2 className="sr-only">Products</h2> */}
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         {listPro.map((pro:any)=>
-        <NavLink onClick={()=>handleFindOne(pro.ProductId)} key={pro.ProductId} to="/product-view" className="group shadow-md">
+        <div onClick={()=>handleFindOne(pro.ProductId)} key={pro.ProductId} to="/product-view" className="group shadow-md">
           <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
             <img
               src={pro.Image}
@@ -48,9 +49,8 @@ const ListProducts:React.FC<{}> = () => {
           <p className="mt-1 text-lg font-medium text-gray-900">{Number(pro.Price).toLocaleString("en")} ₫</p>
           <h3 className="mt-4 text-lg text-gray-700">{pro.ProductName}</h3>
           </div>
-        </NavLink>
+        </div>
   
-
         )}
         
         
@@ -59,7 +59,6 @@ const ListProducts:React.FC<{}> = () => {
   </div>
 
     </div>
-
 
 
 {/* Bộ sưu tập mùa Đông*/}

@@ -4,17 +4,16 @@ export const productSlice = createSlice({
     name: "products",
     initialState: {
         cart:{},
-        getOnePro: "",
+        getOnePro: {},
     },
     reducers: {
         getOnePro: (state:any, action:any)=> {
             console.log("vào getone");
             
-            state = {
+            return  state = {
                 ...state,
                 getOnePro: action.payload
             }
-            return state;
         },
         cart: (state, action) => {
             

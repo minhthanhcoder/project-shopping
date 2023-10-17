@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useState} from 'react'
 import Header from '../../../layout/users/Header'
 import Footer from '../../../layout/users/Footer'
 import "../../../assets/style/product-view.css"
 import {useSelector} from "react-redux"
-
+import { NavLink } from 'react-router-dom'
 const ProductOverView:React.FC<{}> =  () => {
-
-  const data =  useSelector((state:any) => state.products.getOnePro)
-  console.log("data", data);
+  const data = useSelector((state:any)=>state.products.getOnePro)
+  console.log("pro", data);
   
-  
-
-
   const isLogin = JSON.parse(localStorage.getItem("isLogin")|| "[]")
   const handleAddCart = (id:number) => {
     
@@ -24,11 +20,13 @@ const ProductOverView:React.FC<{}> =  () => {
     }
     
   }
-  return (
-   <>
+
+  return ( 
+   <> 
    <Header/>
     <div className='product-view_container'>
-        <h2 className='product-view_title text-center text-3xl text-slate-800 border-b-2 pb-2'>Chi tiết sản phẩm</h2>
+        <h2 className='product-view_title text-center text-3xl text-slate-800 border-b-2 pb-2 mb-2'>Chi tiết sản phẩm</h2>
+        <NavLink to={"/"} className='bg-slate-500 px-4 py-2 rounded-lg  text-white hover:opacity-60'>Quay lại</NavLink>
       <div className='product-view_body'>
       <div>
       <img className='product-img' src={data[0].Image} />

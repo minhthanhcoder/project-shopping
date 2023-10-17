@@ -60,6 +60,7 @@ const Header:React.FC<{}> = () => {
       </div>
       </>}
       </div>
+      {/* cart */}
      {modal? <>
       <div onClick={handleToggleModal} className='fixed top-0 right-0 left-0 bottom-0 bg-slate-500 backdrop-blur-sm bg-opacity-30 z-10 flex justify-end items-start '>
         <div onClick={e => e.stopPropagation()} className='modal-container h-full 2xl:1/4 xl:w-1/3 md:w-1/2 sm:w-1/2 bg-white '>
